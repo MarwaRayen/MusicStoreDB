@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/MarwaRayen/MusicStoreDB/issues"
   },
-  "homepage": "https://github.com/MarwaRayen/MusicStoreDB#readme"
+  "homepage": "https://github.com/MarwaRayen/MusicStoreDB#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "node-couchdb": "^2.0.0"
+  }
 }

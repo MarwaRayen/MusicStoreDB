@@ -1,0 +1,38 @@
+<h3>Mes Instruments</h3>
+
+<ul>
+    <% instruments.forEach(function(instru){ %>
+        <li><h4><%= instru.value.instrument %></h4>
+            <ul>
+                <li>Type: <%= instru.value.type %></li>
+                <li>Edition: <%= instru.value.edition %></li>
+                <li>Price: <%= instru.value.price %></li>
+            </ul>
+        </li>
+        <br>
+        <form action="/instrument/delete<%= instru.key%>" method="post">
+            <input type="hidden" value="<%= instru.value.rev %>" name="rev">
+            <input type="submit" value="Supprimer">
+        </form>
+        <form action="/instrument/update<%= instru.key%>" method="post">
+            <select name="att" id="list" value="attribut">
+                <option value="type" name="type">type</option>
+                <option value="edition"  name="edition">edition</option>
+                <option value="price" name="price">price</option>
+            </select>
+            <input type="text" value="Nouvel valeur" name="newVal">
+            <input type="hidden" value="<%= instru.value.rev %>" name="rev">
+            <input type="submit" value="mofifier">
+        </form>
+        
+    <% }); %>
+</ul>
+
+
+<form action="/instrument/add" method="post">
+    <input type="text" name="instrument" placeholder="Instrument">
+    <input type="text" name="type" placeholder="Type">
+    <input type="text" name="edition" placeholder="Edition">
+    <input type="text" name="price" placeholder="Price">
+    <input type="submit" value="Ajouter">
+</form>
