@@ -1,19 +1,22 @@
-const { Link } = require("react-router-dom");
+
 
 const NavBar = () => {
     return (
-        <nav>
-            <ul className="list-none hidden sm:flex flex-row justify-center gap-10 font-medium">
+        <nav >
+            <div className="flex flex-row justify-center items-center align-center">
+            <ul className="mt-6 list-none hidden sm:flex flex-row justify-center gap-10 font-medium">
                 <li className="text-[16px] hover:text-color-blue font-semibold">
                     <a href="/">Instruments</a>
                 </li>
                 <li className="text-[16px] hover:text-color-blue font-semibold">
-                    <a href="/planning">Albums</a>
+                    <a href="/albums">Albums</a>
                 </li>
                 <li className="text-[16px] hover:text-color-blue font-semibold">
-                    <a href="/catalogue">Tracks</a>
+                    <a href="/tracks">Tracks</a>
                 </li>
             </ul>
+            </div>
+            
       
         </nav>
     );

@@ -7,9 +7,10 @@ const { name } = require('ejs');
 
 const app = express();
 app.use(express.static('public'));
-app.get('./public/style.css', function(req, res) {
+
+app.get('/public/style.css', function(req, res) {
     res.set('Content-Type', 'text/css');
-    res.sendFile(__dirname + '/public/styles.css');
+    res.sendFile(__dirname + '/public/style.css');
 });
 
 const couch = new NodeCouchDb({
@@ -36,7 +37,7 @@ couch.listDatabases().then(function(dbs){
 couch.get(dbName, instrumentsViewUrl).then(
     function(data, headers1, status1){
         data1 = data.data.rows;
-        console.log(data1);
+        //console.log(data1);
         
     }, 
     function(err){
@@ -51,7 +52,7 @@ couch.get(dbName, instrumentsViewUrl).then(
 
 couch.get(dbName, albumsViewUrl).then(
     function(data, headers2, status2){
-        //console.log(data.data.rows);
+        console.log(data.data.rows);
         data2 = data.data.rows;
     }, 
     function(err){
@@ -156,7 +157,7 @@ app.post('/instrument/delete:id', function(req, res){
     })
 })
 
-app.post('/instrument/update:id', async function(req, res){
+app.post('/instrument/update/:id', async function(req, res){
     const id = req.params.id;
     const rev = req.body.rev;
     const attr = req.body.att;
@@ -207,7 +208,7 @@ app.post('/album/add', function(req, res){
     })
 })
 
-app.post('/album/delete:id', function(req, res){
+app.post('/album/delete/:id', function(req, res){
     const id = req.params.id;
     const rev = req.body.rev;
     couch.del(dbName, id, rev).then(function(data, headers, status){
