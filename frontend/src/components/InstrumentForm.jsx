@@ -35,7 +35,7 @@ const InstrumentForm = () => {
 
     return (
         <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a new instrument</h3>
+            <h3><b>Add a new instrument</b></h3>
             <label>Instrument name:</label>
             <input type="text" value={instrument} onChange={(e) => setInstrument(e.target.value)} />
             <label>Type:</label>
@@ -44,7 +44,7 @@ const InstrumentForm = () => {
             <input type="text" value={edition} onChange={(e) => setEdition(e.target.value)} />
             <label>Price:</label>
             <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
-            <button>Add instrument</button>
+            <button class="hover:bg-[#9290C3]">Add instrument</button>
             {err && <p>{err}</p>}
         </form>
     );

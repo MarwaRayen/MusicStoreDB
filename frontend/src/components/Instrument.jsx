@@ -5,7 +5,7 @@ const Instrument = ({ instru }) => {
 
 
     const [val, setVal] = useState('');
-    const [attr, setAttr] = useState('');
+    const [attr, setAttr] = useState('type');
 
 
     const handleSupp = async (e) => {
@@ -36,7 +36,7 @@ const Instrument = ({ instru }) => {
         const rev = instru.value.rev;
         const att = attr;
         const newVal = val;
-        const response = await fetch(`/instrument/update${instru.id}`, {
+        const response = await fetch(`/instrument/update/${instru.id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,22 +48,22 @@ const Instrument = ({ instru }) => {
             console.log(data.error);
         }else{
             setVal('');
-            setAttr('');
+            setAttr('type');
         }
     }
     return (
       <div className="workout-details">
-        <h4>{instru.value.instrument}</h4>
+        <h3><b>{instru.value.instrument}</b></h3>
         <p><strong>Type: </strong>{instru.value.type}</p>
         <p><strong>Edition: </strong>{instru.value.edition}</p>
         <p><strong>Price: </strong>{instru.value.price}</p>
         <p>{instru.createdAt}</p>
         <form className="create mt-5" onSubmit={handleSupp}>
             {/* <input type="hidden" value="<%= instru.value.rev %>" name="rev"/> */}
-           <button className="text-center bg-red-500 text-white py-2 px-4 rounded text-[10px]">supprimer</button>
+           <button className="text-center bg-[#E78895] text-white py-2 px-4 rounded text-[10px] hover:bg-[#EEA5A6]">supprimer</button>
         </form>
         <form className="create mt-5" onSubmit={handleModif}>
-            <select name="att" value={attr} onChange={(e) => setAttr(e.target.attr)}>
+            <select name="att" value={attr} onChange={(e) => setAttr(e.target.value)}>
                 <option value="Select an attribute..." disabled selected>Select an attribute...</option>
                 <option value="type" name="type">type</option>
                 <option value="edition"  name="edition">edition</option>
@@ -72,7 +72,7 @@ const Instrument = ({ instru }) => {
             
             <input type="text"  name="newVal" value={val} onChange={(e) => setVal(e.target.value)}/>
             
-            <button className="text-center text-white py-2 px-4 rounded text-[10px]"> modifier </button>
+            <button className="text-center text-white py-2 px-4 rounded text-[10px] hover:bg-[#9290C3]"> modifier </button>
         </form>
       </div>
     )

@@ -16,11 +16,12 @@ const Instruments = () => {
 
             if (response.ok) {
                 setInstrument(data);
-                console.log(data);
+                console.log(instruments);
             }
         }
 
         fetchInstruments();
+        console.log(instruments);
     }, []);
 
     return (

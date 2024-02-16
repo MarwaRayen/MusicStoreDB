@@ -3,8 +3,8 @@
 const NavBar = () => {
     return (
         <nav >
-            <div className="flex flex-row justify-center items-center align-center">
-            <ul className="mt-6 list-none hidden sm:flex flex-row justify-center gap-10 font-medium">
+            <div className="header flex flex-row justify-center items-center align-center">
+            <ul className="mt-5 mb-5 list-none hidden sm:flex flex-row justify-center gap-10 font-medium">
                 <li className="text-[16px] hover:text-color-blue font-semibold">
                     <a href="/">Instruments</a>
                 </li>

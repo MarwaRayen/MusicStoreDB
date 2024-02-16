@@ -3,35 +3,31 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Titre de votre page</title>
+        <title>Albums</title>
         <link rel="stylesheet" href="../public/style.css"> 
     </head>
     <body>
-
-        <a href="/albums">Albums</a>
         
-        <h3>Mes Instruments </h3>
-
-
+        <h3>Mes Albums</h3>
 
         <ul>
-            <% instruments.forEach(function(instru){ %>
-                <li><h4><%= instru.value.instrument %></h4>
+            <% albums.forEach(function(instru){ %>
+                <li><h4><%= instru.value.name %></h4>
                     <ul>
-                        <li>Type: <%= instru.value.type %></li>
-                        <li>Edition: <%= instru.value.edition %></li>
+                        <li>artist: <%= instru.value.artist %></li>
+                        <li>genre: <%= instru.value.genre %></li>
                         <li>Price: <%= instru.value.price %></li>
                     </ul>
                 </li>
                 <br>
-                <form action="/instrument/delete/<%= instru.key%>" method="post">
+                <form action="/album/delete<%= instru.key%>" method="post">
                     <input type="hidden" value="<%= instru.value.rev %>" name="rev">
                     <input type="submit" value="Supprimer">
                 </form>
-                <form action="/instrument/update/<%= instru.key%>" method="post">
+                <form action="/album/update<%= instru.key%>" method="post">
                     <select name="att" id="list" value="attribut">
-                        <option value="type" name="type">type</option>
-                        <option value="edition"  name="edition">edition</option>
+                        <option value="artist" name="artist">artist</option>
+                        <option value="genre"  name="genre">genre</option>
                         <option value="price" name="price">price</option>
                     </select>
                     <input type="text" value="Nouvel valeur" name="newVal">
@@ -43,10 +39,10 @@
         </ul>
 
 
-        <form action="/instrument/add" method="post">
-            <input type="text" name="instrument" placeholder="Instrument">
-            <input type="text" name="type" placeholder="Type">
-            <input type="text" name="edition" placeholder="Edition">
+        <form action="/album/add" method="post">
+            <input type="text" name="name" placeholder="name">
+            <input type="text" name="artist" placeholder="artist">
+            <input type="text" name="genre" placeholder="genre">
             <input type="text" name="price" placeholder="Price">
             <input type="submit" value="Ajouter">
         </form>

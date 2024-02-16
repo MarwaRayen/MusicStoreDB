@@ -3,10 +3,12 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const NodeCouchDb = require('node-couchdb');
 const { name } = require('ejs');
+const cors = require('cors');
 
 
 const app = express();
 app.use(express.static('public'));
+app.use(cors());
 
 app.get('/public/style.css', function(req, res) {
     res.set('Content-Type', 'text/css');
@@ -103,6 +105,9 @@ app.get('/albums', function(req, res){
         couch.get(dbName, albumsViewUrl).then(
             function(data, headers2, status2){
                 data2 = data.data.rows;
+                // res.render('albums', {
+                //     albums: data2
+                // })
                 res.json(data2);
             }, 
             function(err){
@@ -147,11 +152,11 @@ app.post('/instrument/add', function(req, res){
     })
 })
 
-app.post('/instrument/delete:id', function(req, res){
+app.post('/instrument/delete/:id', function(req, res){
     const id = req.params.id;
     const rev = req.body.rev;
     couch.del(dbName, id, rev).then(function(data, headers, status){
-        res.redirect('/');
+        res.send(data)
     }, function(err){
         res.send(err);
     })
@@ -168,7 +173,7 @@ app.post('/instrument/update/:id', async function(req, res){
     updatedDoc[attr] = value;
     
     couch.update(dbName, updatedDoc).then(function(data, headers, status){
-        res.redirect('/');
+        res.send(data);
     }, function(err){
         res.send(err);
     })
@@ -201,7 +206,7 @@ app.post('/album/add', function(req, res){
             price: price
 
         }).then(function(data, headers, status){
-            res.redirect('/');
+            res.redirect('/albums');
         }, function(err){
             res.send(err);
         })
@@ -212,7 +217,7 @@ app.post('/album/delete/:id', function(req, res){
     const id = req.params.id;
     const rev = req.body.rev;
     couch.del(dbName, id, rev).then(function(data, headers, status){
-        res.redirect('/');
+        res.send(data)
     }, function(err){
         res.send(err);
     })
@@ -220,7 +225,7 @@ app.post('/album/delete/:id', function(req, res){
 
 
 
-app.post('/album/update:id', async function(req, res){
+app.post('/album/update/:id', async function(req, res){
     const id = req.params.id;
     const rev = req.body.rev;
     const attr = req.body.att;
@@ -231,7 +236,7 @@ app.post('/album/update:id', async function(req, res){
     updatedDoc[attr] = value;
     
     couch.update(dbName, updatedDoc).then(function(data, headers, status){
-        res.redirect('/');
+        res.redirect('/albums');
     }, function(err){
         res.send(err);
     })
@@ -263,7 +268,7 @@ app.post('/track/add', function(req, res){
             price: price
 
         }).then(function(data, headers, status){
-            res.redirect('/');
+            res.redirect('/tracks');
         }, function(err){
             res.send(err);
         })
@@ -271,11 +276,12 @@ app.post('/track/add', function(req, res){
 })
 
 
-app.post('/track/delete:id', function(req, res){
+app.post('/track/delete/:id', function(req, res){
     const id = req.params.id;
     const rev = req.body.rev;
     couch.del(dbName, id, rev).then(function(data, headers, status){
-        res.redirect('/');
+        
+        res.send(data)
     }, function(err){
         res.send(err);
     })
@@ -283,7 +289,32 @@ app.post('/track/delete:id', function(req, res){
 
 
 
-app.post('/track/update:id', async function(req, res){
+// app.post('/track/update/:id', async function(req, res){
+//     const id = req.params.id;
+//     const rev = req.body.rev;
+//     const attr = req.body.att;
+//     const value = req.body.newVal;
+    
+//     const Doc = await couch.get(dbName, id).then(function(data, headers, status){
+
+
+//         const updatedDoc = Doc.data;
+//         updatedDoc[attr] = value;
+//         console.log(updatedDoc);
+//         couch.update(dbName, updatedDoc).then(function(data, headers, status){
+//             console.log(data);
+//             res.send(data);
+//         }, function(err){
+//             res.send(err);
+//         })
+//     }, err => {
+//        res.status(404).send(err);
+//     })
+    
+    
+// })
+
+app.post('/track/update/:id', async function(req, res){
     const id = req.params.id;
     const rev = req.body.rev;
     const attr = req.body.att;
@@ -294,7 +325,7 @@ app.post('/track/update:id', async function(req, res){
     updatedDoc[attr] = value;
     
     couch.update(dbName, updatedDoc).then(function(data, headers, status){
-        res.render('/');
+        res.redirect('/tracks');
     }, function(err){
         res.send(err);
     })

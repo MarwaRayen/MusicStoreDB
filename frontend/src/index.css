@@ -6,16 +6,20 @@
 
 /* layout */
 :root {
-  --primary: #1aac83;
-  --error: #e7195a;
+  --primary: #8E7AB5;
+  --error: #EEA5A6;
 }
 body {
   background: #f1f1f1;
   margin: 0;
   font-family: "Poppins";
 }
-header {
+nav div {
   background: #fff;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
 }
 header .container {
   max-width: 1400px;
@@ -49,7 +53,7 @@ header a {
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
-.workout-details h4 {
+.workout-details h3 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
